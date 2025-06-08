@@ -10,15 +10,16 @@ match priority:
     case "low":
         message = f"Note: '{task}' is a low priority task"
     case _:
-        message = f"'{task}' has an unknown priority"
+        message = f"Reminder: '{task}' has an unknown priority level"
 
 if time_bound == "yes" and priority in ["high", "medium"]:
     message += " that requires immediate attention today!"
+elif time_bound == "no" and priority in ["high", "medium"]:
+    message += " that can be completed later."
+elif time_bound == "yes" and priority == "low":
+    message += " that is time-sensitive."
 else:
-    if priority != "low":
-        message += " that can be done later."
-    else:
-        message += ". Consider completing it when you have free time."
+    message += ". Consider completing it when you have free time."
 
 print(message)
 
